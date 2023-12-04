@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 1000000;
+#define faster ios::sync_with_stdio(0); cin.tie(0);
+int dem[MAX+1] = {0};
+bool Prime[MAX+1];
+void Sang() {
+    for(int i = 2 ;i<=MAX;i++) {
+        Prime[i] = true;
+    }
+    for(int i = 2;i<=sqrt(MAX);i++) {
+        if(Prime[i]) {
+            for(int j = i*i;j<=MAX;j+=i) {
+                Prime[j] = false;
+            }
+        }
+    } 
+    for(int i = 2;i<=MAX;i++) {
+        if(Prime[i])
+            dem[i] = dem[i-1] + 1;
+        else 
+            dem[i] = dem[i-1];
+    }
+}
+int main() {
+    Sang();
+    faster
+    int t;
+    cin>>t;
+    while(t--) {
+        int l,r;
+        cin>>l>>r;
+        // if(Prime[l] && Prime[l])
+        //     cout<<dem[r] - dem[l] + 1<<"\n";
+        // else 
+        //     cout<<dem[r] - dem[l]<<"\n";
+        cout<<dem[r] -dem[l-1]<<"\n";
+    }
+    return 0;
+}
