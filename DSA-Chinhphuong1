@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster ios::sync_with_stdio(0); cin.tie(0)
+#define ll long long
+#define MOD 1000000007
+int main () {
+    faster;
+    ll res = 1;
+    ll n;
+    cin>>n;
+    n = 1ll*sqrt(n);
+    ll a[3];
+    a[0] = n;
+    a[1] = n+1;
+    a[2] = (2*n)+1;
+    for(int i = 0 ;i<3;i++) {
+        if(a[i] % 2 ==0) { 
+            a[i]/=2;
+            break;
+        }
+    }
+    for(int i = 0 ;i<3;i++) {
+        if(a[i]%3==0) {
+            a[i]/=3;
+            break;
+        }
+    }
+    for(int i = 0;i<3;i++) {
+        res*=a[i];
+        res%=MOD;
+    }
+   cout<<res;
+    return 0;
+}
