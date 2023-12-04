@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define faster ios::sync_with_stdio(0); cin.tie(0);
+const int MAX = 1000001;
+int Prime[MAX] = {0};
+void Sang() {
+    for(int i = 2 ;i<=MAX;i++) {
+        Prime[i] = i;
+    }
+    for(int i = 2;i<=MAX;i++) {
+        if(Prime[i] == i) {
+            for(int j = 2*i ;j<=MAX;j+=i) {
+                Prime[j] = i;
+            }
+        }
+    }
+}
+int main() {
+    faster
+    Sang();
+    int t;
+    cin>>t;
+    while(t--) {
+        int l,r;
+        cin>>l>>r;
+        int res = 0;
+        for(int i = r ;i>=l;i--) {
+            res = max(Prime[i],res);
+        }
+        cout<<res<<"\n";
+    }
+
+    return 0;
+}
