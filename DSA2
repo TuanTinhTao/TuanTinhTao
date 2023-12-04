@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define faster ios::sync_with_stdio(0); cin.tie(0);
+const int MAX = 1000000;
+bool Prime[MAX];
+int dem[MAX]={0};
+void prime() {
+    for(int i = 2;i<=MAX;i++) {
+        Prime[i] = true;
+    }
+    Prime[1] = Prime[0] = false;
+    for(int i = 2;i<=sqrt(MAX);i++) {
+        if(Prime[i]) {
+            
+            for(int j = i*i ;j<=MAX;j+=i) {
+                Prime[j] = false;
+            }
+        }
+    }
+} 
+short check(int n) {
+    while(n!= 0) {
+        ll res = n%10;
+        if(res != 2 && res != 3 && res != 5 && res != 7) return false;
+            n/=10;
+    }
+    return true;
+}
+void Dem() {
+    dem[0] = dem[1] = 0;
+    for(int i = 2 ;i<=MAX;i++) {
+        if(Prime[i] && check(i)) 
+            dem[i] = dem[i-1] + 1;
+        else 
+            dem[i] = dem[i-1];
+    }
+}
+int main() {
+    prime();
+    Dem();
+    int t;
+    cin>>t;
+    while(t--) {
+        int n;
+        cin>>n;
+     cout<<dem[n]<<"\n";
+    }
+    return 0;
+}
