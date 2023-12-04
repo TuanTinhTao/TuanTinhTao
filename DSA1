@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define MOD 1000000007
+int a[1000001];
+bool Prime[1000001];
+void Sang() { 
+    for(int i = 0 ;i<=1000000;i++) {
+        Prime[i] = true;
+    }
+    Prime[1] = Prime[0] = false;
+    for(int i = 2 ;i<=sqrt(1000000);i++) {
+        if(Prime[i]) {
+            for(int j = i*i ; j<=1000000;j+=i) {
+                Prime[j] = false;
+            }
+        }
+    }
+}
+int main () {
+    Sang();
+    int n;
+    cin>>n;
+    for(int i = 0 ;i<n;i++) {
+        cin>>a[i];
+    }
+    int dem = 0;
+    for(int i = 0 ;i<n;i++) {
+        if(Prime[a[i]]) dem++;
+    }
+    cout<<dem;
+    return 0;
+}
