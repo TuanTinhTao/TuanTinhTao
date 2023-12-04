@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define faster ios::sync_with_stdio(0); cin.tie(0);
+#define ll long long
+#define MOD 1000000007
+int cp[1000];
+void CP() {
+    cp[1] = 1,cp[0] = 0;
+    for(int i = 2;i<=1000;i++) {
+        cp[i] = i*i;
+    }
+}
+int main () {
+    faster;
+    CP();
+    int t;
+    cin>>t;
+    while(t--) {
+        int l,r,dem = 0;
+        cin>>l>>r;
+        for(int i = int(sqrt(l)) ;i<=int(sqrt(r));i++) {
+            if(max(i*i,l) == cp[i]) dem++;
+        }
+        cout<<dem<<"\n";    
+    }
+    return 0;
+}
