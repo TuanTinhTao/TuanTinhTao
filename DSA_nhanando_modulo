@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster ios::sync_with_stdio(0); cin.tie(0);
+#define ll long long
+const ll MOD = 999999999989;
+ll x,y,g;
+ll gcd(ll a,ll b) {
+    if(b==0) return a;
+    return gcd(b,a%b);
+}
+ll Nhan_ando(ll a,ll b) {
+    if(b==0) return 0;
+    if(b==1) return a;
+    ll res = Nhan_ando(a,b/2) % MOD;
+    res = ((res % MOD) + (res % MOD)) % MOD;
+    if(b & 1) {
+        return (res + (a % MOD)) % MOD;
+    }
+    return (res);
+}
+ll LTNP(ll a,ll b) {
+    if(b == 0) return 0;
+    if(b == 1) return a;
+    ll sum = LTNP(a,b/2) % MOD;
+    sum = Nhan_ando(sum,sum);
+    if(b & 1) 
+        return Nhan_ando(sum,a);
+     return sum;
+}
+void exit_ecilid(ll a, ll b) {
+    if(b==0) {
+        x = 1 ;
+        y = 0 ;
+        g = a;
+    }
+    else {
+        exit_ecilid(b,a%b);
+        ll tmp = x;
+        x = y;
+        y =  tmp - a/b * y;
+    }
+}
+ll Modulor_Inverst(ll a,ll b) {
+    if(gcd(a,MOD) != 1) return -1;
+        exit_ecilid(a,b);
+    return (x % b + b) % b;
+}
+int main () {  
+    faster
+    ll u1,q,n;
+    cin>>u1>>q>>n;
+    	if(u1 == 0){
+		cout << 0;
+		return 0;
+	}
+	if(q == 1){
+		ll s = Nhan_ando(u1,n);
+		cout << s;
+		return 0;
+	}
+    ll modun = Modulor_Inverst((q-1),MOD);
+    ll Sum = Nhan_ando(u1,(LTNP(q,n)-1));
+    ll Sum2 = Nhan_ando(Sum,modun);
+    cout<<Sum2;
+    
+    return 0;
+}
